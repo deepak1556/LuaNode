@@ -128,13 +128,9 @@ function ReadStream:__init(fd)
 	local function onKeypress (char)
 		--console.error(luanode.utils.DumpDataInHex(char))
 		newStream:_emitKey(char)
-		--[[
-		newStream:emit("keypress", char)
 		if #dataListeners > 0 and char then
-			--self:emit("data", dataUseString and 
 			newStream:emit("data", char)
 		end
-		]]
 	end
 	
 	local function onResize ()
