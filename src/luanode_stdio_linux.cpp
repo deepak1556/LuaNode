@@ -558,19 +558,6 @@ void LuaNode::Stdio::OnExit (/*lua_State* L*/) {
 	uv_tty_reset_mode();
 }
 
-/*static int SetRawMode (lua_State* L) {
-	luaL_error(L, "NOOOOOOOOOOO");
-	if(lua_toboolean(L, 1) == false) {
-		uv_tty_set_mode(tty_input.get(), 0);
-	}
-	else {
-		if(0 != uv_tty_set_mode(tty_input.get(), 1)) {
-			return luaL_error(L, "SetRawMode");
-		}
-	}
-	return 0;
-}*/
-
 //////////////////////////////////////////////////////////////////////////
 /// 
 int uv_tty_set_mode(TtyStream* tty, int mode) {
