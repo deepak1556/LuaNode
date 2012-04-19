@@ -41,7 +41,6 @@ class TtyStream;
 int uv_tty_set_mode(TtyStream* tty, int mode);
 void uv_tty_reset_mode();
 
-
 class PosixStream : public LuaCppBridge::HybridObjectWithProperties<PosixStream>
 {
 public:
@@ -89,7 +88,6 @@ public:
 		
 		//fprintf(stderr, "length = %d\n", l);
 		boost::asio::async_write(*m_socket,
-		//m_socket->async_write_some(
 			boost::asio::buffer(data, length),
 			boost::bind(&PosixStream::HandleWrite, this, reference, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred)
 		);
@@ -348,20 +346,17 @@ int TtyStream::SetRawMode(lua_State* L)
 
 /////////////////////////////////////////////////////////////////////////
 /// 
-int TtyStream::Write(lua_State* L) {
-	lua_pushvalue(L, 1);
-	int reference = luaL_ref(L, LUA_REGISTRYINDEX);
-
+int TtyStream::Write (lua_State* L) {
 	//fprintf(stderr, "PosixStream::Write-----\n");
 	size_t length;
 	const char* data = luaL_checklstring(L, 2, &length);
-	
-	//fprintf(stderr, "length = %d\n", l);
-	boost::asio::async_write(*m_socket,
-	//m_socket->async_write_some(
-		boost::asio::buffer(data, length),
-		boost::bind(&TtyStream::HandleWrite, this, reference, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred)
-	);
+
+	try {
+		boost::asio::write(*m_socket, boost::asio::buffer(data, length));
+	}
+	catch(boost::system::system_error& e) {
+		return luaL_error(L, "TtyStream::Write - Error writing - %e", e.what());
+	}
 	return 0;
 }
 
@@ -413,7 +408,6 @@ void TtyStream::HandleReadSome(int reference, const boost::system::error_code& e
 	lua_rawgeti(L, LUA_REGISTRYINDEX, reference);
 	luaL_unref(L, LUA_REGISTRYINDEX, reference);
 
-	/*fprintf(stderr, "TtyStream::HandleReadSome\n");*/
 	m_pending_reads--;
 	if(!error) {
 		LogDebug("TtyStream::HandleReadSome (%p) (id:%u) - Bytes Transferred (%lu)\n", this, m_fd, (unsigned long)bytes_transferred);
