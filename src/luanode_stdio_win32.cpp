@@ -315,7 +315,7 @@ static void ReadConsoleHandler (tty_context_t& tty_context, std::vector<INPUT_RE
 						}
 
 						/* Copy the vt100 sequence to the handle buffer. */
-						assert(prefix_len + vt100_len < sizeof m_tty_context.last_key);
+						assert(prefix_len + vt100_len < sizeof tty_context.last_key);
 						memcpy(&tty_context.last_key[prefix_len], vt100, vt100_len);
 	
 						tty_context.last_key_len = (unsigned char) (prefix_len + vt100_len);

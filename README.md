@@ -71,9 +71,9 @@ The following has been tested on Ubuntu Desktop 10.10 / Debian testing.
    - sudo ldconfig -v
    
  - Install LuaRocks
-   - wget http://luarocks.org/releases/luarocks-2.0.5.tar.gz
-   - tar xvf luarocks-2.0.5.tar.gz
-   - cd luarocks-2.0.5
+   - wget http://luarocks.org/releases/luarocks-2.0.8.tar.gz
+   - tar xvf luarocks-2.0.8.tar.gz
+   - cd luarocks-2.0.8
    - ./configure
    - make
    - sudo make install
@@ -89,6 +89,10 @@ The following has been tested on Ubuntu Desktop 10.10 / Debian testing.
    - cd build/linux
    - export INCONCERT_DEVEL=~/devel
    - make
+
+When compiling on ArchLinux, the last step is this:
+
+   - make PREFIX=/usr LIB_DIR=/usr/lib
    
 *Note: This installation procedure will be simplified in the future.*
 
@@ -98,6 +102,13 @@ If you already have Lua, OpenSSL and Boost installed, you can use [CMake](http:/
  - git clone git://github.com/ignacio/LuaNode.git --recursive
  - cd LuaNode/build
  - cmake ..
+ - cmake --build .
+
+ When build on ArchLinux, you need to change the install prefix, so the steps required are:
+
+ - git clone git://github.com/ignacio/LuaNode.git --recursive
+ - cd LuaNode/build
+ - cmake -DCMAKE_INSTALL_PREFIX=/usr ..
  - cmake --build .
  
 
@@ -115,14 +126,15 @@ The two most glaring difference between *Node.js* and **LuaNode** are:
 
 The unit tests provide lots of examples. They are available at the `test` folder.
 
-## Acknowledgments #
-I'd like to acknowledge the work of the following people:
+## Acknowledgements #
+I'd like to acknowledge the work of the following people or group:
 
  - Ryan Dahl, obviously, for his work on [Node.js][11] and [http-parser][14], which I use to parse http requests.
  - Renato Maia, for allowing me to take parts of [Loop][13].
  - Keith Howe, for [LuaCrypto][15]
  - Michal Kottman, for his additions to [LuaCrypto][16]. He also contributed a CMakeLists.txt to ease building.
  - Steve Donovan, for allowing me to take parts of [Penlight][17].
+ - Joyent, for [Node.js][11] and [libuv][18]. Parts of libuv were adapted (terminal handling, etc). 
 
  
 ## License #
@@ -146,3 +158,4 @@ I'd like to acknowledge the work of the following people:
 [15]: http://luacrypto.luaforge.net/
 [16]: https://github.com/mkottman/luacrypto/
 [17]: https://github.com/stevedonovan/Penlight
+[18]: https://github.com/joyent/libuv

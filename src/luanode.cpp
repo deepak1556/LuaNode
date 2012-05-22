@@ -78,7 +78,7 @@ extern char **environ;
 namespace LuaNode {
 
 static const char* LUANODE_PROGNAME = "LuaNode";
-static const char* LUANODE_VERSION = "0.0.1pre";
+static const char* LUANODE_VERSION = "0.0.1";
 static const char* compileDateTime = "" __DATE__ """ - """ __TIME__ "";
 
 static int option_end_index = 0;
@@ -123,6 +123,16 @@ static CLogger* logger = NULL;
 	}
 	lua_pushboolean(L, true);
 	return 1;
+}
+
+//////////////////////////////////////////////////////////////////////////
+/// ->error message, error code
+/// To be used when preparing callback arguments: cb(err, stuff)
+/*static*/ int BoostErrorToCallback (lua_State* L, const boost::system::error_code& ec)
+{
+	lua_pushstring(L, ec.message().c_str());
+	lua_pushinteger(L, ec.value());
+	return 2;
 }
 
 //////////////////////////////////////////////////////////////////////////
