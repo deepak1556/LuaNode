@@ -688,7 +688,7 @@ static int Load(int argc, char *argv[]) {
 
 #if defined(_WIN32)
 	lua_pushinteger(L, _getpid());
-#elif defined(__linux__) || defined(__FreeBSD__)
+#elif defined(__linux__) || defined(__FreeBSD__) || defined(__APPLE__)
 	lua_pushinteger(L, getpid());
 #else
 	#error "unsupported platform"
