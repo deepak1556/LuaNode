@@ -4,6 +4,7 @@
 #include "platform.h"
 
 #include <mach/mach.h>
+#include <mach-o/dyld.h> /* _NSGetExecutablePath */
 
 static char s_process_title[16];
 

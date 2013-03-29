@@ -48,7 +48,7 @@ ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "BSD")
         src/luanode_posix_stream.cpp
         src/detail/posix/tty_stream.cpp
     )
-ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "DARWIN")
+ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     # Mac OS X specific code
     SET(OS
         src/luanode_file_linux.cpp
