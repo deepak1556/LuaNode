@@ -10,10 +10,7 @@ static char s_process_title[16];
 using namespace LuaNode;
 
 void Platform::SetProcessTitle(const char* title) {
-	// see: http://manpages.courier-mta.org/htmlman2/prctl.2.html
-	strncpy(s_process_title, title, 16);
-	s_process_title[15] = 0;
-	prctl(PR_SET_NAME, s_process_title);
+	// Not implemented yet
 }
 
 int Platform::SetProcessTitle(lua_State* L) {
@@ -24,7 +21,7 @@ int Platform::SetProcessTitle(lua_State* L) {
 
 const char* Platform::GetProcessTitle(int *len) {
 	static char title[16];
-	prctl(PR_GET_NAME, title);
+	strcpy(title, "not available");
 	*len = strlen(title);
 	return title;
 }
