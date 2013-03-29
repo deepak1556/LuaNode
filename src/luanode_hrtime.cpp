@@ -53,6 +53,8 @@ hrtime_init init;
 #elif defined (__APPLE__)
 #  include <mach/mach.h>
 #  include <mach/mach_time.h>
+#  define __STDC_FORMAT_MACROS
+#  include <inttypes.h>
 #else
 #  include <time.h>
 #  define __STDC_FORMAT_MACROS
