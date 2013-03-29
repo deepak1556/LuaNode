@@ -46,6 +46,14 @@ ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "BSD")
         src/luanode_posix_stream.cpp
         src/detail/posix/tty_stream.cpp
     )
+ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "")
+    SET(OS
+        src/luanode_file_linux.cpp
+        src/platform_darwin.cpp
+        src/luanode_stdio_linux.cpp
+        src/luanode_posix_stream.cpp
+        src/detail/posix/tty_stream.cpp
+    )
 ELSE()
     SET(OS
         src/luanode_file_linux.cpp

@@ -52,7 +52,7 @@
 
 
 #ifndef SIGPOLL
-#if defined (__FreeBSD__)
+#if defined (__FreeBSD__) || defined (__APPLE__)
 #define SIGPOLL SIGIO
 #endif
 #endif
